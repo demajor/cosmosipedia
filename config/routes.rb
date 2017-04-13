@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
 
   get 'welcome/index'
 
@@ -8,6 +10,18 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
 end
+
+# Rails.application.routes.draw do
+#   devise_for :users
+
+#   get 'welcome/index'
+
+#   get 'welcome/about'
+
+#   root 'welcome#index'
+
+# end
+
 
 # Rails.application.routes.draw do
 
