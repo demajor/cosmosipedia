@@ -37,9 +37,10 @@ end
 group :development do
   gem 'sqlite3'
   gem 'listen', '~> 3.0.5'
-  # gem 'spring'
+  gem 'web-console', '~> 2.0'
   gem 'spring-watcher-listen', '~> 2.0.0'
   # gem 'pry-rails'
+  # gem 'spring'
 end
 
 gem 'devise'
@@ -53,7 +54,6 @@ group :development, :test do
   gem 'shoulda'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'byebug'
-  gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'faker'
   gem 'pry-rails'
