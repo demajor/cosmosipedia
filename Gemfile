@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
+
 # ruby "~> 2.3.0"
-ruby '2.3.0'
+# ruby '2.3.0'
 # CSS framework Bootstrap gem
 gem 'bootstrap-sass'
 # For encrypting User passwords
@@ -29,6 +30,11 @@ gem 'jbuilder', '~> 2.5'
 # Figaro to store Sendgrid and Devise credentials as environment variables
 gem 'figaro'
 
+gem 'devise'
+gem 'pundit'
+gem 'stripe'
+gem 'redcarpet'
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'
@@ -38,15 +44,10 @@ group :development do
   gem 'sqlite3'
   gem 'listen', '~> 3.0.5'
   gem 'web-console', '~> 2.0'
+  gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   # gem 'pry-rails'
-  # gem 'spring'
 end
-
-gem 'devise'
-gem 'pundit'
-gem 'stripe'
-gem 'redcarpet'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
@@ -54,7 +55,7 @@ group :development, :test do
   gem 'shoulda'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'byebug'
-  gem 'spring'
+  # gem 'spring'
   gem 'faker'
   gem 'pry-rails'
 end
