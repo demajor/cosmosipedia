@@ -28,32 +28,31 @@ gem 'pundit'
 gem 'stripe'
 gem 'redcarpet'
 
-group :development, :test do
-  gem 'rspec-rails', '~> 3.0'
-  gem 'rails-controller-testing'
-  gem 'shoulda'
-  gem 'factory_girl_rails', '~> 4.0'
-  gem 'byebug', platform: :mri  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'faker'
-  gem 'pry-rails'
-end
-
-group :development do
-  gem 'sqlite3'                 # Use sqlite3 as the database for Active Record
-  gem 'web-console', '~> 2.0'
-  gem 'listen', '~> 3.0.5'
-  gem 'spring'                  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring-watcher-listen', '~> 2.0.0'
-end
-
 # always use: "bundle install --without production" command to install gems during development
 group :production do
   gem 'pg'
   gem 'rails_12factor'
 end
 
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
-# Use Puma as the app server
-# gem 'puma', '~> 3.0'
+group :development do
+  gem 'sqlite3'                     # Use sqlite3 as the database for Active Record
+  gem 'web-console', '~> 3.3.0'
+end
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.5'
+  gem 'rails-controller-testing'
+  gem 'shoulda'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'byebug'                      # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'faker'
+  gem 'pry-rails'
+  gem 'listen', '~> 3.0.5'
+  gem 'spring'                      # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'pundit'
+end
+
+
+
 

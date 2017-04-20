@@ -55,4 +55,21 @@ class WikisController < ApplicationController
     end
   end
 
+
+private
+
+  def wiki_params
+    params.require(:wiki).permit(:title, :body, :private, :user)
+  end
+
+  def authorize_user
+    unless current_user?
+      flash[:alert] = "You must be a registered user to do that!"
+      redirect_to wikis_path
+    end
+  end
 end
+
+
+
+
