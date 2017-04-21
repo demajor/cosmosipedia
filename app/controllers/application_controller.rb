@@ -7,4 +7,10 @@ class ApplicationController < ActionController::Base
     root_path
   end
 
+  private
+
+  def user_not_authorized
+    flash[:alert] = "You're not authorized to do that!"
+    redirect_to @wiki
+  end
 end
