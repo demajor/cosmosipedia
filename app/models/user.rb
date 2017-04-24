@@ -4,13 +4,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-  after_create :send_admin_mail
-
   has_many :wikis, dependent: :destroy
 
+  before_save { self.role ||= :standard }
+  
   enum role: [:standard, :premium, :admin]
 
-  def send_admin_mail
-    UserMailer.send_welcome_email(self).deliver_later
-  end 
+  # after_create :send_admin_mail
+
+  # def send_admin_mail
+  #   UserMailer.send_welcome_email(self).deliver_later
+  # end 
 end

@@ -4,12 +4,13 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
   
+  resources :user, only: [:show]
+  resources :wikis
+
   root 'welcome#index'
   get 'welcome/index'
   get 'welcome/about'
   # get 'about' => 'welcome#about'
-
-  resources :wikis
 
 end
 
