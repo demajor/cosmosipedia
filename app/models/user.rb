@@ -6,7 +6,7 @@ class User < ApplicationRecord
   enum role: [:standard, :premium, :admin]
   after_initialize :set_default_role
   # before_save { self.role ||= :standard }
-
+    
   def admin?
     role == :admin
   end
