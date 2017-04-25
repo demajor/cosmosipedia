@@ -17,7 +17,7 @@ class WikisController < ApplicationController
     @wiki.body = params[:wiki][:body]
 
     if @wiki.save
-      flash[:notice] = "Wiki was saved!"
+      flash[:notice] = "Wiki is now posted!"
       redirect_to @wiki
     else
       flash.now[:alert] = "There was an error saving the wiki post...please try again."
@@ -35,7 +35,7 @@ class WikisController < ApplicationController
     @wiki.body = params[:wiki][:body]
 
     if @wiki.save
-      flash[:notice] = "Wiki posting was updated successfully."
+      flash[:notice] = "Wiki posting is now updated!"
       redirect_to @wiki
     else
       flash.now[:alert] = "There was an error updating the wiki...please try again."
