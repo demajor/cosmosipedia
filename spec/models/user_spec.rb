@@ -1,30 +1,52 @@
 require 'rails_helper'
+require 'faker'
 
 RSpec.describe User, type: :model do
-  it 'password length less than 5 characters is invalid' do
-    user = User.new(email: 'elfman@gmail.com', password: '1234')
-    result = user.save
-    expect(result).to be(false)
+
+  let(:user) { create(:user) }
+
+  describe "attributes" do
+
+    it "should have an email attribute" do
+      expect(user).to have_attributes(email: "user34@factory.com")
+    end
+
+    it "responds to role" do
+      expect(user).to respond_to(:role)
+    end
+
+    it "responds to admin?" do
+      expect(user).to respond_to(:admin?)
+    end
+
+    it "responds to standard?" do
+      expect(user).to respond_to(:standard?)
+    end
+
+    it "responds to premium?" do
+      expect(user).to respond_to(:premium?)
+    end
   end
 
-  it 'password length must be atleast 5 characters' do
-    user = User.new(email: 'elfman@gmail.com', password: '12345')
-    result = user.save
-    expect(result).to be(true)
-  end
+  describe "roles" do
 
-  it 'email must be unique' do
-    user = User.new(email: 'elfman@gmail.com', password: '12345')
-    user.save
+    it "is standard by default" do
+      expect(user.role).to eql("standard")
+    end
 
-    u = User.new(email: 'elfman@gmail.com', password: '12345')
-    u.save
-    expect(u.errors.get(:email)).to eq(["has already been taken"])
-  end
+    context "standard user" do
 
-  it 'email with invalid format is invalid' do
-    user = User.new(email: 'elfman', password: '12345')
-    user.save
-    expect(user.errors.get(:email)).to eq(['is invalid'])
+      it "returns true for #standard?" do
+        expect(user.standard?).to be_truthy
+      end
+
+      it "returns false for #admin?" do
+        expect(user.admin?).to be_falsey
+      end
+
+      it "returns false for #premium?" do
+        expect(user.premium?).to be_falsey
+      end
+    end
   end
 end

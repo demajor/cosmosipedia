@@ -1,44 +1,26 @@
-require 'random_data'
+require 'faker'
 
-# Create Users
+# Create users
 5.times do
   User.create!(
-    # name: RandomData.random_name,
-    email: RandomData.random_email,
-    password: RandomData.random_sentence
-    )
-end
-users = User.all
-
-# Create admin user
-unless User.find_by(email: 'admin@example.com')
-  User.create!(
-    #name: 'Admin',
-    email: 'admin@example.com',
-    password: 'helloworld',
-    #role: 'admin'
-  )
-end
-
-unless User.find_by(email: 'member@example.com')
-  User.create!(
-    #name: 'Member',
-    email: 'member@example.com',
-    password: 'helloworld'
+    email: Faker::Internet.email,
+    password: "password",
+    password_confirmation: "password"
+    # role: "standard"
   )
 end
 users = User.all
 
-# Create Wikis
-10.times do
+# Create wikis
+25.times do
   Wiki.create!(
     user: users.sample,
-    title:  RandomData.random_sentence,
-    body:   RandomData.random_paragraph
+    title: Faker::Book.title,
+    body: Faker::Lorem.paragraph,
+    private: false
   )
 end
-wikis = Wiki.all
 
 puts "Seed finished"
 puts "#{User.count} users created"
-puts "#{Wiki.count} wiki posts created"
+puts "#{Wiki.count} wikis created"
