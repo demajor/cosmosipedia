@@ -1,5 +1,48 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+// @import "font-awesome";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+}
+
+body {
+  background-repeat: no-repeat;
+  background-color: #FDBB30
+}
+
+hr {
+  color: black;
+  display: block;
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+}
+
+li {
+  list-style-type: none;
+}
+
+.container {
+  font-family: 'Cabin', sans-serif;
+  margin-top: 5px;
+  color: #002D62;
+}
+
+.navbar-link {
+  font-size: 1.1rem;
+  padding: .25rem;
+  color: #002D62;
+}
 
 .nav {
   margin-top: 5px;
@@ -13,9 +56,45 @@
 
 .user-info {
   margin-top: 12px;
-}
-
-.container {
-  margin-top: 5px;
   color: #002D62;
 }
+
+.login {
+  width: 65%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+// .field {
+//   margin-bottom: 1rem;
+//   height: 2rem;
+// }
+
+.field_with_errors {
+  height: 2rem;
+}
+
+.input {
+  height: 100%;
+  width: 100%;
+}
+
+.btn-primary {
+  width: 70%;
+}
+
+a {
+  color: #002D62;
+}
+
+a:link {
+    text-decoration: none;
+
+}
+
+a:hover, a:active {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+
