@@ -27,6 +27,7 @@ gem 'devise'
 gem 'pundit'
 gem 'stripe'
 gem 'redcarpet'
+gem 'pundit'
 
 # always use: "bundle install --without production" command to install gems during development
 group :production do
@@ -50,7 +51,6 @@ group :development, :test do
   gem 'faker'
   gem 'pry-rails'
   gem 'listen', '~> 3.0.5'
-  gem 'pundit'
 end
 
 

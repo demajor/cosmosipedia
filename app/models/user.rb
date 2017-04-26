@@ -2,9 +2,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-  has_many :wikis
-  before_save { self.role ||= :standard }
+  has_many :wikis, dependent: :destroy
+
   enum role: [:standard, :premium, :admin]
+
+  before_save { self.role ||= :standard }
+
   after_initialize :set_default_role
 
     
