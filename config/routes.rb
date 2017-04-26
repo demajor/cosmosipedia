@@ -4,11 +4,13 @@ Rails.application.routes.draw do
 
   get 'welcome/about'
 
-  devise_for :users
-  # devise_for :users, controllers: {
-  #   sessions: 'users/sessions'
-  # }
+  # devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
   
+  resources :user, only: [:show]
+
   resources :wikis
 
   resources :wikis do
