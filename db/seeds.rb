@@ -7,7 +7,7 @@ User.destroy_all
   user = User.new(
     # name: Faker::Name.name,      
     email: Faker::Internet.email,
-    password: 'password_confirmation'
+    password: 'password'
     )
   user.skip_confirmation!
   user.save!

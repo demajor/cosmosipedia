@@ -3,9 +3,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   has_many :wikis
+  before_save { self.role ||= :standard }
   enum role: [:standard, :premium, :admin]
   after_initialize :set_default_role
-  # before_save { self.role ||= :standard }
+
     
   def admin?
     role == :admin
@@ -22,6 +23,6 @@ class User < ApplicationRecord
   private
 
   def set_default_role
-  self.role ||= :standard
+    self.role ||= :standard
   end
 end
