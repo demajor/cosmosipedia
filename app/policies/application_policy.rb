@@ -1,10 +1,10 @@
 class ApplicationPolicy
-  attr_reader :user, :record
+  attr_reader :user, :wiki
 
   def initialize(user, record)
-    raise Pundit::NotAuthorizedError, "must be logged in" unless user
+    # raise Pundit::NotAuthorizedError, "must be logged in" unless user
     @user = user
-    @record = record
+    @wiki = wiki
   end
 
   def index?
@@ -24,6 +24,7 @@ class ApplicationPolicy
   end
 
   def update?
+    # true
     user.present?
   end
 

@@ -16,6 +16,8 @@ class WikisController < ApplicationController
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
 
+    authorize @wiki
+
     if @wiki.save
       flash[:notice] = "Wiki is now posted!"
       redirect_to @wiki
@@ -65,12 +67,12 @@ private
     params.require(:wiki).permit(:title, :body, :private, :user)
   end
 
-  def authorize_user
-    unless current_user?
-      flash[:alert] = "You must be a registered user to do that!"
-      redirect_to wikis_path
-    end
-  end
+  # def authorize_user
+  #   unless current_user?
+  #     flash[:alert] = "You must be a registered user to do that!"
+  #     redirect_to wikis_path
+  #   end
+  # end
 end
 
 
