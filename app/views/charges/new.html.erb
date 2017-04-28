@@ -1,0 +1,11 @@
+<div class="container">
+  <h1 class="text-center">Upgrade Your Account</h1>
+<%= form_tag charges_path do %>
+  <h4>Click the button to pay & upgrade!</h4>
+  <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" 
+    data-key="<%= @stripe_btn_data[:key] %>" 
+    data-amount="<%= @stripe_btn_data[:amount] %>" 
+    data-description="<%= @stripe_btn_data[:description] %>">    
+  </script>
+<% end %>
+</div>

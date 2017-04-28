@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
   
-  root 'welcome#index'
-
-  get 'welcome/about'
-
   # devise_for :users
   devise_for :users, controllers: {
     sessions: 'users/sessions'
@@ -16,5 +12,11 @@ Rails.application.routes.draw do
   resources :wikis do
     resources :collaborators, only: [:new, :create, :destroy]
   end
+
+  resources :charges, only: [:new, :create]
+
+  root 'welcome#index'
+
+  get 'welcome/about'
   
 end

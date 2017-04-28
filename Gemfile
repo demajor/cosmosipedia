@@ -25,7 +25,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'figaro'
 gem 'devise'
 gem 'pundit'
-gem 'stripe'
+gem 'stripe', git: 'https://github.com/stripe/stripe-ruby'
 gem 'redcarpet'
 gem 'pundit'
 
