@@ -23,11 +23,12 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 # Figaro to store Sendgrid and Devise credentials as environment variables
 gem 'figaro'
-gem 'devise'
-gem 'pundit'
 gem 'stripe', git: 'https://github.com/stripe/stripe-ruby'
+gem 'haml'
+gem 'devise'
 gem 'redcarpet'
 gem 'pundit'
+
 
 # always use: "bundle install --without production" command to install gems during development
 group :production do
