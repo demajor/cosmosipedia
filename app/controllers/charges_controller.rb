@@ -10,19 +10,25 @@ class ChargesController < ApplicationController
   end
 
   def create
+    @amount = Amount.new
     # Creates a Stripe Customer object, for associating
     # with the charge
-    if current_user.role == 'premium'
-      current_user.toggle_role
-      flash[:notice] = "#{current_user.email} is now a #{current_user.role} member!"
-      redirect_to wikis_path
-
-    else
-    @amount = Amount.new
     customer = Stripe::Customer.create(
       email: current_user.email,
       card: params[:stripeToken]
     )
+
+    # if current_user.role == 'premium'
+    #   current_user.toggle_role
+    #   flash[:notice] = "#{current_user.email} is now a #{current_user.role} member!"
+    #   redirect_to wikis_path
+
+    # else
+    # @amount = Amount.new
+    # customer = Stripe::Customer.create(
+    #   email: current_user.email,
+    #   card: params[:stripeToken]
+    # )
 
     # Where the real magic happens
     charge = Stripe::Charge.create(
@@ -38,13 +44,13 @@ class ChargesController < ApplicationController
     flash[:notice] = "Welcome to premium, #{ current_user.email }! You can now create private wikis."
     redirect_to wikis_path
 
-    if charge.paid && current_user.toggle_role
-      flash[:notice] = "#{current_user.email} is now a #{current_user.role} member!"
-    else
-      flash[:alert] = "Doh! There was an error upgrading your account!"
-    end
-      redirect_to wikis_path
-  end
+  #   if charge.paid && current_user.toggle_role
+  #     flash[:notice] = "#{current_user.email} is now a #{current_user.role} member!"
+  #   else
+  #     flash[:alert] = "Doh! There was an error upgrading your account!"
+  #   end
+  #     redirect_to wikis_path
+  # end
 
     # Stripe will send back CardErrors, with friendly messages
     # when something goes wrong.
