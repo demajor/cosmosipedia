@@ -6,6 +6,5 @@ Rails.configuration.stripe = {
 
 # Confirmation of API keys being read during initialization
 # Set our app-stored secret key with Stripe
-# Rails.logger.info "key: #{ Rails.configuration.stripe[:publishable_key] }"
+Rails.logger.info "key: #{ Rails.configuration.stripe[:publishable_key] }"
   Stripe.api_key = Rails.configuration.stripe[:secret_key]
-  # Stripe.api_key = Rails.application.secrets.stripe_api_key

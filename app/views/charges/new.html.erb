@@ -1,11 +1,21 @@
 <div class="container">
-  <h1 class="text-center">Upgrade Your Account</h1>
-<%= form_tag charges_path do %>
-  <h4>Click the button to pay & upgrade!</h4>
-  <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" 
-    data-key="<%= @stripe_btn_data[:key] %>" 
-    data-amount="<%= @stripe_btn_data[:amount] %>" 
-    data-description="<%= @stripe_btn_data[:description] %>">    
-  </script>
-<% end %>
+  <div class="col-sm-6">
+    <h2>Upgrade Your Account</h2>
+    <% if user_signed_in? && current_user.role == 'standard' %>
+      <%= form_tag charges_path do %>
+        <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" 
+          data-key="<%= @stripe_btn_data[:key] %>" 
+          data-amount="<%= @stripe_btn_data[:amount] %>" 
+          data-description="<%= @stripe_btn_data[:description] %>">    
+        </script>
+      <% end %>
+    <% else if user_signed_in? && current_user.role == 'premium' %>
+    <h4><b>Awesome, you are currently a premium member!<br> To change your membership click: <br> <%= link_to 'Edit Profile', edit_user_registration_path, class: 'btn btn-lg' %> </b></h4>
+    <% else %>
+      <p><strong>Please create an account before upgrading.</strong></p>
+      <%= link_to "Sign Up", new_user_registration_path, :class => 'btn btn-lg'  %>
+    <% end %>
+    <% end %>
+    </div>
+  </div>
 </div>

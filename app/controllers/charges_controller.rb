@@ -4,7 +4,7 @@ class ChargesController < ApplicationController
     @amount = Amount.new
     @stripe_btn_data = {
      key: "#{ Rails.configuration.stripe[:publishable_key] }",
-     description: "BigMoney Membership - #{ current_user.email }",
+     description: "Premium Upgrade - #{ current_user.email }",
      amount: @amount.default
     }
   end
@@ -12,6 +12,12 @@ class ChargesController < ApplicationController
   def create
     # Creates a Stripe Customer object, for associating
     # with the charge
+    if current_user.role == 'premium'
+      current_user.toggle_role
+      flash[:notice] = "#{current_user.email} is now a #{current_user.role} member!"
+      redirect_to wikis_path
+
+    else
     @amount = Amount.new
     customer = Stripe::Customer.create(
       email: current_user.email,
@@ -22,15 +28,23 @@ class ChargesController < ApplicationController
     charge = Stripe::Charge.create(
       customer: customer.id, # Note -- this is NOT the user_id in your app
       amount: @amount.default,
-      description: "BigMoney Membership - #{ current_user.email }",
+      description: "Premium Upgrade - #{ current_user.email }",
       currency: 'usd'
     )
 
     # Set current_user to premium account
     current_user.premium!
 
-    flash[:notice] = "Thanks for all the money, #{ current_user.email }! Feel free to pay me again."
-    redirect_to user_path(current_user) # or wherever
+    flash[:notice] = "Welcome to premium, #{ current_user.email }! You can now create private wikis."
+    redirect_to wikis_path
+
+    if charge.paid && current_user.toggle_role
+      flash[:notice] = "#{current_user.email} is now a #{current_user.role} member!"
+    else
+      flash[:alert] = "Doh! There was an error upgrading your account!"
+    end
+      redirect_to wikis_path
+  end
 
     # Stripe will send back CardErrors, with friendly messages
     # when something goes wrong.
@@ -40,10 +54,18 @@ class ChargesController < ApplicationController
       redirect_to new_charge_path
   end
 
-end
+  def delete
+    if current_user.toggle_role
+      flash[:notice] = "#{current_user.email} is now a #{current_user.role} member!"
+    else
+      flash[:alert] = "Doh! There was an error downgrading your account!"
+    end
+    redirect_to wikis_path
+  end
 
-class Amount
-  def default
-    return 5_00
+  class Amount
+    def default
+      return 5_00
+    end
   end
 end

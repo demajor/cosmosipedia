@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   
-  # devise_for :users
-  devise_for :users, controllers: {
-    sessions: 'users/sessions'
-  }
+  devise_for :users
+  # devise_for :users, controllers: {
+  #   sessions: 'users/sessions'
+  # }
   
   resources :user, only: [:show]
 
@@ -13,7 +13,8 @@ Rails.application.routes.draw do
     resources :collaborators, only: [:new, :create, :destroy]
   end
 
-  resources :charges, only: [:new, :create]
+  get '/charges', to: 'charges#delete', as: :standard
+  resources :charges, only: [:new, :create, :destroy]
 
   root 'welcome#index'
 

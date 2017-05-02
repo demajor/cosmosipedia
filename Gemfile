@@ -22,7 +22,7 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Figaro to store Sendgrid and Devise credentials as environment variables
-gem 'figaro'
+gem 'figaro', '1.0'
 gem 'stripe', git: 'https://github.com/stripe/stripe-ruby'
 gem 'haml'
 gem 'devise'
