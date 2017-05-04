@@ -41,12 +41,12 @@
 
   <div class="col-sm-6">
     <h2>Your Account</h2>
-    <p>Account type:<strong> <%=current_user.role%> </strong></p>
+    <p>Account type:<strong> <%=current_user.role %> </strong></p>
 
     <% if user_signed_in? && current_user.role == 'standard' %>
       <%= link_to "Upgrade to Premium", new_charge_path, :class => 'btn btn-primary' %>
     <% else if user_signed_in? && current_user.role == 'premium' %>
-      <%= link_to "Downgrade Account", standard_path, data: { confirm: "Are you sure? All private wikis will be removed" }, :class => 'btn btn-default' %>
+      <%= link_to "Downgrade Account", standard_path, data: { confirm: "Are you sure? All private wikis will become public." }, :class => 'btn btn-default' %>
     <% end %>
     <% end %>
 

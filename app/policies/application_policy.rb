@@ -24,8 +24,8 @@ class ApplicationPolicy
   end
 
   def update?
-    # true
-    user.present?
+    true
+    # user.present?
   end
 
   def edit?

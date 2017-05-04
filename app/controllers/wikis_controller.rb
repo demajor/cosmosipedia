@@ -1,20 +1,27 @@
 class WikisController < ApplicationController
   def index
+    @user = current_user
     @wikis = Wiki.all
+    # @wikis = policy_scope(Wiki)
   end
 
   def show
+    @user = current_user
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
 
   def new
     @wiki = Wiki.new
+    authorize @wiki
   end
 
   def create
     @wiki = Wiki.new(user: current_user)
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
+    @wiki.private = params[:wiki][:body]
+    @wiki.user = current_user
 
     authorize @wiki
 
@@ -37,6 +44,7 @@ class WikisController < ApplicationController
     authorize @wiki
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
+    @wiki.private = params[:wiki][:body]
     @wiki.user = current_user
 
     if @wiki.save
@@ -50,6 +58,7 @@ class WikisController < ApplicationController
 
   def destroy
     @wiki = Wiki.find(params[:id])
+    @user = current_user
     authorize @wiki
 
     if @wiki.destroy
@@ -67,14 +76,4 @@ private
     params.require(:wiki).permit(:title, :body, :private, :user)
   end
 
-  # def authorize_user
-  #   unless current_user?
-  #     flash[:alert] = "You must be a registered user to do that!"
-  #     redirect_to wikis_path
-  #   end
-  # end
 end
-
-
-
-
