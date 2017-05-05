@@ -7,7 +7,7 @@
       <div class="media">
         <div class="media-body">
           <h4 class="media-heading">
-            <% if wiki.private == false %>
+            <% unless wiki.private %>
             <%= link_to wiki.title, wiki %>
           </h4>
             <h5>Created <%= time_ago_in_words wiki.created_at %> ago by <%= wiki.user.email || current_user.email %></h5>
@@ -25,7 +25,7 @@
       <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary' %>    
     </div>
     <div class="col-md-4">
-    <% if current_user.role == 'premium' %>
+      <% if current_user.premium? || current_user.admin? %>
     <h2>Your Private Wikis</h2>
       <% if @user.wikis.count >= 1 %>
         <% @user.wikis.each do |wiki| %>
