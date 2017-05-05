@@ -1,8 +1,10 @@
-<h1><%= @wiki.title %></h1>
+<h1> <%= @wiki.title %> </h1>
 
 <div class="row">
   <div class="col-md-8">
-    <p><%= @wiki.body %></p>
+    <h4>
+    <p> <%= markdown(@wiki.body) %> </p>
+    </h4>
     <h5>Created <%= time_ago_in_words @wiki.created_at %> ago by <%= @wiki.user.email || current_user.email %></h5>
     <p>√<% if @wiki.private %>
       <small>private</small>
