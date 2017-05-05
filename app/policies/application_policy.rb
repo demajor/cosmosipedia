@@ -1,5 +1,5 @@
 class ApplicationPolicy
-  attr_reader :user, :record
+  attr_reader :user, :wiki
 
   def initialize(user, record)
     @user = user
@@ -23,7 +23,7 @@ class ApplicationPolicy
   end
 
   def update?
-    false
+    true
     # user.present?
   end
 

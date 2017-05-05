@@ -18,13 +18,6 @@ class WikiPolicy < ApplicationPolicy
     true
   end
 
-  #   if @wiki.private
-  #     (@user.premium? && @wiki.user == @user) || @user.admin? || @wiki.collaborating_users.include?(@user)
-  #   else
-  #     @user.standard? || @user.premium? || @user.admin?
-  #   end
-  # end
-
   def create?
     user
   end

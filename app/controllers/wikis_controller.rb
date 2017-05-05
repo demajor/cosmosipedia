@@ -17,10 +17,11 @@ class WikisController < ApplicationController
   end
 
   def create
-    @wiki = Wiki.new(user: current_user)
-    @wiki.title = params[:wiki][:title]
-    @wiki.body = params[:wiki][:body]
-    @wiki.private = params[:wiki][:body]
+    # @wiki = Wiki.new(user: current_user)
+    # @wiki.title = params[:wiki][:title]
+    # @wiki.body = params[:wiki][:body]
+    # @wiki.private = params[:wiki][:body]
+    @wiki = Wiki.new(wiki_params)
     @wiki.user = current_user
 
     authorize @wiki
@@ -41,11 +42,14 @@ class WikisController < ApplicationController
 
   def update
     @wiki = Wiki.find(params[:id])
+    @wiki.assign_attributes(wiki_params)
+    
+    # @wiki.title = params[:wiki][:title]
+    # @wiki.body = params[:wiki][:body]
+    # @wiki.private = params[:wiki][:body]
+    # @wiki.user = current_user
+
     authorize @wiki
-    @wiki.title = params[:wiki][:title]
-    @wiki.body = params[:wiki][:body]
-    @wiki.private = params[:wiki][:body]
-    @wiki.user = current_user
 
     if @wiki.save
       flash[:notice] = "Wiki posting is now updated!"
@@ -58,7 +62,7 @@ class WikisController < ApplicationController
 
   def destroy
     @wiki = Wiki.find(params[:id])
-    @user = current_user
+    # @user = current_user
     authorize @wiki
 
     if @wiki.destroy
@@ -73,7 +77,7 @@ class WikisController < ApplicationController
 private
 
   def wiki_params
-    params.require(:wiki).permit(:title, :body, :private, :user)
+    params.require(:wiki).permit(:title, :body, :private)
   end
 
 end
