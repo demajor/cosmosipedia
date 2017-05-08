@@ -4,6 +4,10 @@ class User < ApplicationRecord
 
   has_many :wikis
 
+  has_many :collaborators
+  has_many :collaborating_wikis, through: :collaborators, source: :wiki
+
+  before_create { self.role ||= :standard }
   before_save { self.email ||= email.downcase }
   after_initialize { self.role ||= :standard }
 

@@ -19,3 +19,21 @@
     <% end %>
   </div>
 </div>
+<div class="col-md-4">
+  <% if !@wiki.collaborating_users.empty? %>
+    <h3>Collaborating Users</h3>
+      <div class="media">
+        <div class="media-body">
+          <h4 class="media-heading">
+      <h5>
+      <% @wiki.collaborating_users.each do |user| %>
+        <p>  <%= user.email  %> </p>
+          <% if @wiki.collaborating_users.count > 0 %>
+          <%= link_to "Delete Collaborator", delete_collaborator_wiki_path(user_id: user), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this collaborator?' } %>
+          <% end %>
+        </p>
+      <% end %>
+      </h5>
+  </div>
+</div>
+<% end %>

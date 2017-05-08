@@ -1,9 +1,20 @@
 Rails.application.routes.draw do
   devise_for :users
   
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    member do
+      put :downgrade
+    end
+  end
 
-  resources :wikis
+  resources :wikis do
+    member do
+      put :add_collaborator
+    end
+    member do
+      delete :delete_collaborator
+    end
+  end
 
   resources :wikis do
     resources :collaborators, only: [:new, :create, :destroy]

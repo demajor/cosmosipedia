@@ -3,8 +3,8 @@ class WikisController < ApplicationController
 
   def index
     @user = current_user
-    @wikis = Wiki.all
-    # @wikis = policy_scope(Wiki)
+    # @wikis = Wiki.all
+    @wikis = policy_scope(Wiki)
   end
 
   def show
@@ -76,7 +76,38 @@ class WikisController < ApplicationController
     end
   end
 
-private
+
+  def delete_collaborator
+    @wiki = Wiki.find(params[:id])
+    @user = User.find(params[:user_id])
+
+    flash[:notice] = "Collaborating user was deleted successfully."
+
+    @wiki.collaborating_users.delete(@user)
+    redirect_to wiki_path
+  end
+
+  def add_collaborator
+    @wiki = Wiki.find(params[:id])
+    @user = User.find_by(email: params[:coll_email])
+
+    if @user.nil?
+      flash[:alert] = "User not found!"
+      redirect_to wiki_path(@wiki)
+      return
+    end
+
+    if @wiki.collaborating_users.include?(@user)
+      flash[:alert] = "You're already a collaborator on this wiki!"
+      redirect_to wiki_path(@wiki)
+    else
+      @wiki.collaborating_users << @user
+      redirect_to wiki_path(@wiki), notice: "Collaborating user was added successfully."
+    end
+  end
+
+
+  private
 
   def wiki_params
     params.require(:wiki).permit(:title, :body, :private)
