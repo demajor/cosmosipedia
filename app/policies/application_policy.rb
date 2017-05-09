@@ -3,7 +3,8 @@ class ApplicationPolicy
 
   def initialize(user, record)
     @user = user
-    @wiki = wiki
+    # @wiki = wiki
+    @record = record
   end
 
   def index?
@@ -24,7 +25,8 @@ class ApplicationPolicy
 
   def update?
     # true
-    user.present?
+    # user.present?
+    false
   end
 
   def edit?

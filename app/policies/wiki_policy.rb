@@ -7,9 +7,9 @@ class WikiPolicy < ApplicationPolicy
     @wiki = wiki
   end
 
-  def index?
-    true
-  end
+  # def index?
+  #   true
+  # end
 
   def show?
     if wiki.private
@@ -28,6 +28,7 @@ class WikiPolicy < ApplicationPolicy
 
   def update?
     allowed
+    # @user.present?
   end
 
   def edit?

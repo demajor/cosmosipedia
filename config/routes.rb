@@ -16,15 +16,16 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :wikis do
-    resources :collaborators, only: [:new, :create, :destroy]
-  end
+  # resources :wikis do
+  #   resources :collaborators, only: [:new, :create, :destroy]
+  # end
 
   get '/charges', to: 'charges#delete', as: :downgrade #:standard
   resources :charges, only: [:new, :create, :destroy]
 
+  
+  get 'welcome/about'
+
   root 'welcome#index'
 
-  get 'welcome/about'
-  
 end

@@ -1,14 +1,15 @@
 class WikisController < ApplicationController
+  include ApplicationHelper
   require 'redcarpet'
 
   def index
+    @wikis = policy_scope(Wiki)
     @user = current_user
     # @wikis = Wiki.all
-    @wikis = policy_scope(Wiki)
   end
 
   def show
-    # @user = current_user
+    @user = current_user
     @wiki = Wiki.find(params[:id])
     authorize @wiki
   end

@@ -3,13 +3,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   has_many :wikis
-  has_many :collaborators
+  has_many :collaborators, dependent: :destroy
   has_many :collaborating_wikis, through: :collaborators, source: :wiki
 
   validates_associated :wikis
   validates_associated :collaborators
 
-  before_create { self.role ||= :standard }
   before_save { self.email ||= email.downcase }
   after_initialize { self.role ||= :standard }
 

@@ -2,8 +2,8 @@ class Wiki < ApplicationRecord
   belongs_to :user
 
   has_many :users
-
   has_many :collaborators
+  # has_many :users, through: :collaborators
   has_many :collaborating_users, through: :collaborators, source: :user
 
   validates :user, presence: true
