@@ -4,10 +4,10 @@
   <div class="row">
     <div class="col-md-8">
       <% @wikis.each do |wiki| %>
+      <% unless wiki.private %>
         <div class="media">
           <div class="media-body">
             <h4 class="media-heading">
-              <% unless wiki.private %>
                 <%= link_to markdown(wiki.title), wiki %>
             </h4>
               <h5>Created <%= time_ago_in_words wiki.created_at %> ago by <%= wiki.user.email || current_user.email %></h5>
@@ -16,9 +16,9 @@
               <% else %>
                 <small>public</small>
               <% end %> </p>
-            <% end %>
+            </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
     </div>
     <div class="col-md-4">

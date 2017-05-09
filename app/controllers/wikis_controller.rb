@@ -55,7 +55,7 @@ class WikisController < ApplicationController
 
   def destroy
     @wiki = Wiki.find(params[:id])
-    # @user = current_user
+    @user = current_user
     authorize @wiki
 
     if @wiki.destroy
