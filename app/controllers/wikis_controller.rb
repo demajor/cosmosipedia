@@ -8,7 +8,7 @@ class WikisController < ApplicationController
   end
 
   def show
-    @user = current_user
+    # @user = current_user
     @wiki = Wiki.find(params[:id])
     authorize @wiki
   end
@@ -19,10 +19,6 @@ class WikisController < ApplicationController
   end
 
   def create
-    # @wiki = Wiki.new(user: current_user)
-    # @wiki.title = params[:wiki][:title]
-    # @wiki.body = params[:wiki][:body]
-    # @wiki.private = params[:wiki][:body]
     @wiki = Wiki.new(wiki_params)
     @wiki.user = current_user
 
@@ -45,11 +41,6 @@ class WikisController < ApplicationController
   def update
     @wiki = Wiki.find(params[:id])
     @wiki.assign_attributes(wiki_params)
-    
-    # @wiki.title = params[:wiki][:title]
-    # @wiki.body = params[:wiki][:body]
-    # @wiki.private = params[:wiki][:body]
-    # @wiki.user = current_user
 
     authorize @wiki
 
@@ -80,6 +71,7 @@ class WikisController < ApplicationController
   def delete_collaborator
     @wiki = Wiki.find(params[:id])
     @user = User.find(params[:user_id])
+    @wiki.user = current_user
 
     flash[:notice] = "Collaborating user was deleted successfully."
 
@@ -90,6 +82,7 @@ class WikisController < ApplicationController
   def add_collaborator
     @wiki = Wiki.find(params[:id])
     @user = User.find_by(email: params[:coll_email])
+    @wiki.user = current_user
 
     if @user.nil?
       flash[:alert] = "User not found!"
