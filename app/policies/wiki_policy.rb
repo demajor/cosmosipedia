@@ -28,7 +28,6 @@ class WikiPolicy < ApplicationPolicy
 
   def update?
     allowed
-    # @user.present?
   end
 
   def edit?
@@ -36,7 +35,7 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def destroy?
-    allowed
+    @user == @wiki.user || user.admin?
   end
 
   def allowed
