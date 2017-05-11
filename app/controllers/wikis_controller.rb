@@ -69,17 +69,6 @@ class WikisController < ApplicationController
   end
 
 
-  def delete_collaborator
-    @wiki = Wiki.find(params[:id])
-    @user = User.find(params[:user_id])
-    @wiki.user = current_user
-
-    flash[:notice] = "Collaborating user was deleted successfully."
-
-    @wiki.collaborating_users.delete(@user)
-    redirect_to wiki_path
-  end
-
   def add_collaborator
     @wiki = Wiki.find(params[:id])
     @user = User.find_by(email: params[:coll_email])
@@ -95,16 +84,25 @@ class WikisController < ApplicationController
       flash[:alert] = "You're already a collaborator on this wiki!"
       redirect_to wiki_path(@wiki)
     else
-      @wiki.collaborating_users << @user
-      redirect_to wiki_path(@wiki), notice: "Collaborating user was added successfully."
+      @wiki.collaborating_users << @user 
+      redirect_to wiki_path(@wiki), notice: "Collaborator added successfully."
     end
   end
 
+  def delete_collaborator
+    @wiki = Wiki.find(params[:id])
+    @user = User.find(params[:user_id])
+    @wiki.user = current_user
+
+    flash[:notice] = "Collaborator deleted successfully."
+
+    @wiki.collaborating_users.delete(@user)
+    redirect_to wiki_path
+  end
 
   private
 
   def wiki_params
     params.require(:wiki).permit(:title, :body, :private)
   end
-
 end

@@ -35,7 +35,7 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def destroy?
-    @user == @wiki.user || user.admin?
+    @user == @wiki.user || user.admin? || !@user.collaborating_wikis
   end
 
   def allowed

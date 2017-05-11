@@ -35,6 +35,9 @@
                 <% if wiki.private %>
                   <p><%= link_to wiki.title, wiki %></p>
                   <h5>Created <%= time_ago_in_words wiki.created_at %> ago by <%= wiki.user.email || current_user.email %></h5>
+                    <% if wiki.collaborating_users.count >= 1 %>
+                    <h5><b>Current Collaborator count: <%= wiki.collaborating_users.count %></b></h5>
+                    <% end %>
                 <p>√<% if wiki.private %>
                   <small>private</small>
                 <% else %>
@@ -47,20 +50,16 @@
         </div>
       </div>
       <% else %>
-        <p>You haven't created any private wikis yet!</p>
+        <p>Now that you're a premium member, start creating private wikis and collaborations today!</p>
       <% end %>
-
-    <div>
-      <% #if current_user.collaborating_wikis %>
-      <% if current_user.standard? && collaborating_users == true %>
-        <% if @user.collaborating_wikis.count > 0 %>
-       <h3>Collaborative Wikis</h3>
-        <% @user.wikis.each do |wiki| %>
-        <% #@wiki.collaborating_users.each do |user| %>
+  <% end %>
+  <div>
+   <% if @user.collaborating_wikis.count >= 1 %>
+      <h3>Collaborative Wikis</h3>
+          <% @user.collaborating_wikis.each do |wiki| %>
           <div class="media">
             <div class="media-body">
               <h4 class="media-heading">
-                <% if wiki.private %>
                   <p><%= link_to wiki.title, wiki %></p>
                   <h5>Created <%= time_ago_in_words wiki.created_at %> ago by <%= wiki.user.email || current_user.email %></h5>
                 <p>√<% if wiki.private %>
@@ -69,13 +68,9 @@
                   <small>public</small>
                 <% end %> </p>
               <% end %>
-            <% end %>
             </h4>
           </div>
         </div>
-      </div>
-      <% end %>
-    </div>
-  <% end %>
-  <% end %>
+    <% end %>
+   </div>
 </div>

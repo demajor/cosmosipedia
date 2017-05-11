@@ -5,8 +5,7 @@ class User < ApplicationRecord
   has_many :wikis
   has_many :collaborators, dependent: :destroy
   has_many :collaborating_wikis, through: :collaborators, source: :wiki
-  # has_many :wikis, through: :collaborators
-  # has_many :collaborating_users, through: :collaborators, source: :user
+  has_many :collaborating_users, through: :collaborators, source: :user
 
 
   validates_associated :wikis
